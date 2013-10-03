@@ -22,11 +22,15 @@ post '/event/create' do
   event.save
   @error = event.errors.full_messages
 
-  if @error.any?
-    @error = @error.join(", ")
-    erb :index
+  if request.xhr?
+    "success"
   else
-    redirect to "/user/home"
+    if @error.any?
+      @error = @error.join(", ")
+      erb :index
+    else
+      redirect to "/user/home"
+    end
   end
 end
 

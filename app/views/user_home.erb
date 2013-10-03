@@ -7,7 +7,7 @@
 
 <h3>Create a new event</h3>
 <p><%= @error %></p>
-<form action="/event/create" method="POST">
+<form id="create_event" action="/event/create" method="POST">
   <label for="name">Event Name: </label>
   <input type="text" id="name" name="event[name]" placeholder="event name here"><br>
     <label for="location">Location: </label>
@@ -24,19 +24,23 @@
 
 <h3>Events you've created</h3>
 <p><%= @message %></p>
-<ul>
-<% current_user.created_events.each do |e| %>
-  <li><a href="/event/view/<%= e.id %>"><%= e.name %></a>
-    <form action="/event/destroy" method="POST">
-      <input type="hidden" name="event" value="<%= e.id %>">
-      <input type="submit" value="Delete this event">
-    </form>
-  </li>
-<% end %>
+<ul id="created_events">
+  <% current_user.created_events.each do |e| %>
+    <li><a href="/event/view/<%= e.id %>"><%= e.name %></a>
+      <form action="/event/destroy" method="POST">
+        <input type="hidden" name="event" value="<%= e.id %>">
+        <input type="submit" value="Delete this event">
+      </form>
+    </li>
+  <% end %>
 </ul>
+
 <h3>Events you've attended</h3>
 <ul>
-<% current_user.attended_events.each do |e| %>
-  <li><a href="/event/view/<%= e.id %>"><%= e.name %></a></li>
-<% end %>
+  <% current_user.attended_events.each do |e| %>
+    <li><a href="/event/view/<%= e.id %>"><%= e.name %></a></li>
+  <% end %>
 </ul>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/application.js"></script>

@@ -1,14 +1,17 @@
-<form action="/event/create" method="POST">
+<h3>View/Edit Your Event</h3>
+<p><%= @error %></p>
+<form action="/event/update" method="POST">
   <label for="name">Event Name: </label>
-  <input type="text" id="name" name="event[name]" placeholder="event name here"><br>
+  <input type="hidden" name="id" value="<%= @event.id %>">
+  <input type="text" id="name" name="event[name]" value="<%= @event.name %>"><br>
     <label for="location">Location: </label>
-  <input type="text" id="location" name="event[location]" placeholder="event location here"><br>
+  <input type="text" id="location" name="event[location]" value="<%= @event.location %>"><br>
 
     <label for="starts_at">Start time: </label>
-  <input type="text" id="starts_at" name="event[starts_at]"><br>
+  <input type="text" id="starts_at" name="event[starts_at]" value="<%= @event.starts_at %>"><br>
     <label for="ends_at">End time: </label>
-  <input type="text" id="ends_at" name="event[ends_at]"><br>
+  <input type="text" id="ends_at" name="event[ends_at]" value="<%= @event.ends_at %>"><br>
 
-  <input type="submit" value="Create Event">
+  <input type="submit" value="Edit this event">
 
 </form>

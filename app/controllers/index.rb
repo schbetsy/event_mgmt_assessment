@@ -16,7 +16,7 @@ post '/sign_in' do
   user = User.authenticate(params[:user])
   if user
     session[:user_id] = user.id
-    erb :user_home
+    redirect to "/user/home"
   else
     redirect to '/?error_login=true' 
   end
@@ -30,6 +30,6 @@ post '/sign_up' do
     @error_signup = @error_signup.join(", ")
     erb :index
   else
-    erb :user_home
+    redirect to "/user/home"
   end
 end

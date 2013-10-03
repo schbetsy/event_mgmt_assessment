@@ -1,2 +1,43 @@
-<p>you're in!</p>
 <a href="/log_out">Log Out</a>
+<p>
+<%= current_user.first_name %>
+<%= current_user.last_name %>
+<%= current_user.email %>
+<%= current_user.birthdate %>
+</p>
+
+<h3>Create a new event</h3>
+<p><%= @error %></p>
+<form action="/event/create" method="POST">
+  <label for="name">Event Name: </label>
+  <input type="text" id="name" name="event[name]" placeholder="event name here"><br>
+    <label for="location">Location: </label>
+  <input type="text" id="location" name="event[location]" placeholder="event location here"><br>
+
+    <label for="starts_at">Start time: </label>
+  <input type="text" id="starts_at" name="event[starts_at]"><br>
+    <label for="ends_at">End time: </label>
+  <input type="text" id="ends_at" name="event[ends_at]"><br>
+
+  <input type="submit" value="Create Event">
+
+</form>
+
+<h3>Events you've created</h3>
+<p><%= @message %></p>
+<ul>
+<% current_user.created_events.each do |e| %>
+  <li><a href="/event/view/<%= e.id %>"><%= e.name %></a>
+    <form action="/event/destroy" method="POST">
+      <input type="hidden" name="event" value="<%= e.id %>">
+      <input type="submit" value="Delete this event">
+    </form>
+  </li>
+<% end %>
+</ul>
+<h3>Events you've attended</h3>
+<ul>
+<% current_user.attended_events.each do |e| %>
+  <li><a href="/event/view/<%= e.id %>"><%= e.name %></a></li>
+<% end %>
+</ul>

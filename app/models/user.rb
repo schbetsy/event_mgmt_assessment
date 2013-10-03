@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :attended_events
-  has_many :created_events
+  has_many :event_attendances
+  has_many :attended_events, through: :event_attendances, source: :event
+  has_many :created_events, class_name: "Event", foreign_key: "user_id"
 
   validates :password, presence: true
   validates :email, presence: true, uniqueness: true, 
@@ -26,5 +27,8 @@ class User < ActiveRecord::Base
     nil
   end
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
 
 end

@@ -17,9 +17,7 @@ end
 #======== POST ===========================
 post '/event/create' do
   p params
-  event = Event.new(params[:event])
-  event.creator = current_user
-  event.save
+  event = current_user.created_events.create(params[:event])
   @error = event.errors.full_messages
 
   if request.xhr?

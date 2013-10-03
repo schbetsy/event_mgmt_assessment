@@ -30,6 +30,7 @@ post '/sign_up' do
     @error_signup = @error_signup.join(", ")
     erb :index
   else
+    session[:user_id] = user.id
     redirect to "/user/home"
   end
 end
